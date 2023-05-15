@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "projet backend crypto currency portfolio",
   "scripts": {
-    "build": "babel src/index.js -d dist",
-    "start": "npm run build && node dist/index.js"
+    "build": "babel src/** -d dist",
+    "start": "babel-watch src/index.js"
   },
   "keywords": [
     "portfolio",
@@ -24,6 +24,9 @@
   "devDependencies": {
     "@babel/cli": "^7.21.5",
     "@babel/core": "^7.21.8",
-    "@babel/preset-env": "^7.21.5"
+    "@babel/node": "^7.20.7",
+    "@babel/preset-env": "^7.21.5",
+    "babel-watch": "^7.7.2",
+    "nodemon": "^2.0.22"
   }
 }
