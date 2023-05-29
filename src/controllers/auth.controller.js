@@ -1,4 +1,5 @@
 import {validationResult} from "express-validator";
+import bcrypt from "bcrypt";
 export  const Loging = async  (req, res) =>  {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
