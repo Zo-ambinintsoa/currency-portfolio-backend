@@ -1,7 +1,7 @@
-const Currency = require('../models/Currency').Currency;
+import { Currency } from '../models/Currency';
 
 // Create a new currency
-exports.createCurrency = async (req, res, next) => {
+export const createCurrency = async (req, res, next) => {
     try {
         const { ticker, name, APIUrl } = req.body;
         const currency = await Currency.create({ ticker, name, APIUrl });
@@ -12,7 +12,7 @@ exports.createCurrency = async (req, res, next) => {
 };
 
 // Get all currencies
-exports.getAllCurrencies = async (req, res, next) => {
+export const getAllCurrencies = async (req, res, next) => {
     try {
         const currencies = await Currency.find();
         res.json(currencies);
@@ -22,7 +22,7 @@ exports.getAllCurrencies = async (req, res, next) => {
 };
 
 // Get a specific currency by ID
-exports.getCurrencyById = async (req, res, next) => {
+export const getCurrencyById = async (req, res, next) => {
     try {
         const currency = await Currency.findById(req.params.id);
         if (!currency) throw new Error('Currency not found');
@@ -33,7 +33,7 @@ exports.getCurrencyById = async (req, res, next) => {
 };
 
 // Update a currency
-exports.updateCurrency = async (req, res, next) => {
+export const updateCurrency = async (req, res, next) => {
     try {
         const { ticker, name, APIUrl } = req.body;
         const currency = await Currency.findByIdAndUpdate(
@@ -49,7 +49,7 @@ exports.updateCurrency = async (req, res, next) => {
 };
 
 // Delete a currency
-exports.deleteCurrency = async (req, res, next) => {
+export const deleteCurrency = async (req, res, next) => {
     try {
         const currency = await Currency.findByIdAndDelete(req.params.id);
         if (!currency) throw new Error('Currency not found');

@@ -1,4 +1,4 @@
-import {changePassword, Loging, Logout, SignUp} from "./controllers/auth.controller";
+import {changePassword, Login, Logout, SignUp} from "./controllers/auth.controller";
 import {createCurrency, getAllCurrencies, getCurrencyById, updateCurrency, deleteCurrency} from "./controllers/currency.controller";
 import {isAdmin, isAuthenticated} from "./middleware/isAdmin";
 import {loginValidation, signUpValidation, validateChangePassword} from "./validation/user.validation";
@@ -6,7 +6,7 @@ import {loginValidation, signUpValidation, validateChangePassword} from "./valid
 export const routes = (router)=>{
 
 // Login
-router.post('/api/login', loginValidation, Loging)
+router.post('/api/login', loginValidation, Login)
 
 // Register
 router.post('/api/signup', signUpValidation, SignUp)

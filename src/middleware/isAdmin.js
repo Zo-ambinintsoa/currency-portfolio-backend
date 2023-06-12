@@ -1,11 +1,10 @@
 // Import any required dependencies
 import { verify } from "jsonwebtoken";
-import config from '../../config';
 import {cookieParser} from "../helpers/cookieParser";
 
 // Middleware to check if user is an admin
 export const isAdmin = (req, res, next) => {
-    const { role } = req.user;
+    const { role } = req.userId;
 
     if (role === 'admin') {
         next(); // User is an admin, continue to the next middleware or route handler
@@ -16,7 +15,7 @@ export const isAdmin = (req, res, next) => {
 
 // Middleware to check if user is a simple user
 export const isUser = (req, res, next) => {
-    const { role } = req.user;
+    const { role } = req.userId;
 
     if (role === 'user') {
         next(); // User is a simple user, continue to the next middleware or route handler
@@ -26,11 +25,13 @@ export const isUser = (req, res, next) => {
 };
 
 // Middleware to check if user is authenticated
-exports.isAuthenticated = (req, res, next) => {
+export const isAuthenticated = (req, res, next) => {
     try {
         // Get the token from the request cookies
         const token = cookieParser(req);
-        console.log(token.authToken)
+
+        // console.log(token.authToken)
+
         // If token is not found or invalid, return unauthorized
         if (!token.authToken) {
             return res.status(401).json({ message: 'Unauthorized' });
@@ -41,7 +42,7 @@ exports.isAuthenticated = (req, res, next) => {
             if (err) {
                 return res.status(401).json({ message: 'Unauthorized' });
             }
-
+            console.log(decoded)
             // If token is valid, attach the decoded user ID to the request object
             req.userId = decoded.userId;
             next();
