@@ -1,4 +1,4 @@
-import {changePassword, Loging, SignUp} from "./controllers/auth.controller";
+import {changePassword, Loging, Logout, SignUp} from "./controllers/auth.controller";
 import {createCurrency, getAllCurrencies, getCurrencyById, updateCurrency, deleteCurrency} from "./controllers/currency.controller";
 import {isAdmin, isAuthenticated} from "./middleware/isAdmin";
 import {loginValidation, signUpValidation, validateChangePassword} from "./validation/user.validation";
@@ -10,6 +10,9 @@ router.post('/api/login', loginValidation, Loging)
 
 // Register
 router.post('/api/signup', signUpValidation, SignUp)
+
+// Logout
+router.get('/api/logout', isAuthenticated, Logout)
 
 // Change password
 router.post('/api/changePassword', isAuthenticated, validateChangePassword,changePassword)

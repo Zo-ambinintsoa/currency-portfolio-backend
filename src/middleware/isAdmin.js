@@ -1,6 +1,7 @@
 // Import any required dependencies
 import { verify } from "jsonwebtoken";
 import config from '../../config';
+import {cookieParser} from "../helpers/cookieParser";
 
 // Middleware to check if user is an admin
 export const isAdmin = (req, res, next) => {
@@ -27,8 +28,8 @@ export const isUser = (req, res, next) => {
 // Define the middleware function
 export const isAuthenticated = (req, res, next) => {
     // Get the token from the request headers
-    const token = req.header('x-auth-token');
-
+    const token = cookieParser(req);
+    console.log(token)
     // Check if the token is missing
     if (!token) {
         return res.status(401).json({ msg: 'No token, authorization denied' });

@@ -32,7 +32,7 @@ export  const Loging = async  (req, res) =>  {
         const token = sign( payload , process.env.SECRETE_TOKEN)
 
 
-        res.cookie("jwt", token, {
+        res.cookie("x-auth-token", token, {
             httpOnly: true,
             maxAge: 24 * 26 * 60 * 1000 // 1 days
         })
@@ -71,6 +71,13 @@ export const SignUp = async (req, res) => {
         console.error('Error during signup:', error);
         res.status(500).json({ error: error });
     }
+}
+
+export const Logout = async (req, res) => {
+    res.clearCookie('x-auth-token');
+    res.status(200).send({
+        message: 'logout'
+    });
 }
 
 export const changePassword = async (req, res) => {
