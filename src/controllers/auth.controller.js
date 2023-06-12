@@ -29,13 +29,14 @@ export  const Loging = async  (req, res) =>  {
             email: user.email
         };
 
-        const token = sign( payload , process.env.SECRETE_TOKEN)
+        // Generate JWT token
+        const token = sign({ userId: user._id }, process.env.SECRETE_TOKEN, { expiresIn: '1h' });
+
+        // const token = sign( payload , process.env.SECRETE_TOKEN)
 
 
-        res.cookie("x-auth-token", token, {
-            httpOnly: true,
-            maxAge: 24 * 26 * 60 * 1000 // 1 days
-        })
+        // Set the token as a cookie in the response
+        res.cookie('authToken', token, { httpOnly: true, maxAge: 3600000 });
 
         res.json({ message: 'Login successful' });
     } catch (error) {
@@ -74,7 +75,7 @@ export const SignUp = async (req, res) => {
 }
 
 export const Logout = async (req, res) => {
-    res.clearCookie('x-auth-token');
+    res.clearCookie('authToken');
     res.status(200).send({
         message: 'logout'
     });

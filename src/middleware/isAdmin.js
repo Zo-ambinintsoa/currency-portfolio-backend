@@ -25,28 +25,30 @@ export const isUser = (req, res, next) => {
     }
 };
 
-// Define the middleware function
-export const isAuthenticated = (req, res, next) => {
-    // Get the token from the request headers
-    const token = cookieParser(req);
-    console.log(token)
-    // Check if the token is missing
-    if (!token) {
-        return res.status(401).json({ msg: 'No token, authorization denied' });
-    }
-
+// Middleware to check if user is authenticated
+exports.isAuthenticated = (req, res, next) => {
     try {
+        // Get the token from the request cookies
+        const token = cookieParser(req);
+        console.log(token.authToken)
+        // If token is not found or invalid, return unauthorized
+        if (!token.authToken) {
+            return res.status(401).json({ message: 'Unauthorized' });
+        }
+
         // Verify the token
-        const decoded = verify(token, config.secret);
+        verify(token.authToken,  process.env.SECRETE_TOKEN, (err, decoded) => {
+            if (err) {
+                return res.status(401).json({ message: 'Unauthorized' });
+            }
 
-        // Attach the decoded user object to the request
-        req.user = decoded.user;
-
-        // Proceed to the next middleware or route handler
-        next();
-    } catch (err) {
-        // Token is invalid
-        res.status(401).json({ msg: 'Invalid token' });
+            // If token is valid, attach the decoded user ID to the request object
+            req.userId = decoded.userId;
+            next();
+        });
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ message: 'Internal server error' });
     }
 };
 
