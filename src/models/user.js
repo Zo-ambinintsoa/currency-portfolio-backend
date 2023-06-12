@@ -7,7 +7,7 @@ const UserSchema = new Schema({
         index: true
     },
     password: String,
-    role: Boolean,
+    role: String,
     portfolio: [{
         address: String,
         currency : [{

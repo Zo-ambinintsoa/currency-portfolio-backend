@@ -1,23 +1,21 @@
 import {changePassword, Loging, SignUp} from "./controllers/auth.controller";
-import {body} from "express-validator";
 import {createCurrency, getAllCurrencies, getCurrencyById, updateCurrency, deleteCurrency} from "./controllers/currency.controller";
 import {isAdmin, isAuthenticated} from "./middleware/isAdmin";
+import {loginValidation, signUpValidation, validateChangePassword} from "./validation/user.validation";
 
 export const routes = (router)=>{
-    router.post('/api/login',
-        [
-            body('email').isEmail().withMessage('Invalid email address'),
-            body('password').notEmpty().withMessage('Password is required'),
-        ], Loging)
-    router.post('/api/signup',   [
-            body('email').isEmail().withMessage('Invalid email address'),
-            body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long'),
-    ],SignUp)
 
-    router.post('/api/changePassword', isAuthenticated, changePassword)
+// Login
+router.post('/api/login', loginValidation, Loging)
 
-    // Create a new currency
-    router.post('/currencies', isAuthenticated, isAdmin, createCurrency);
+// Register
+router.post('/api/signup', signUpValidation, SignUp)
+
+// Change password
+router.post('/api/changePassword', isAuthenticated, validateChangePassword,changePassword)
+
+// Create a new currency
+router.post('/currencies', isAuthenticated, isAdmin, createCurrency);
 
 // Get all currencies
     router.get('/currencies', isAuthenticated, getAllCurrencies);

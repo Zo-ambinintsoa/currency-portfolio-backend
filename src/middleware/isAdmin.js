@@ -1,6 +1,6 @@
 // Import any required dependencies
-import jwt from 'jsonwebtoken';
-import config from 'config';
+import { verify } from "jsonwebtoken";
+import config from '../../config';
 
 // Middleware to check if user is an admin
 export const isAdmin = (req, res, next) => {
@@ -36,7 +36,7 @@ export const isAuthenticated = (req, res, next) => {
 
     try {
         // Verify the token
-        const decoded = jwt.verify(token, config.get('jwtSecret'));
+        const decoded = verify(token, config.secret);
 
         // Attach the decoded user object to the request
         req.user = decoded.user;

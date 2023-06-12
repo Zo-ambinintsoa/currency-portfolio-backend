@@ -1,7 +1,8 @@
 import {validationResult} from "express-validator";
 import bcrypt from "bcrypt";
+import {sign} from "jsonwebtoken";
 
-const User = require("../models/user").User;
+import {User} from "../models/user";
 
 export  const Loging = async  (req, res) =>  {
     const errors = validationResult(req);
@@ -23,6 +24,18 @@ export  const Loging = async  (req, res) =>  {
         if (!passwordMatch) {
             return res.status(401).json({ error: 'Invalid credentials' });
         }
+        const payload = {
+            id: user.id,
+            email: user.email
+        };
+
+        const token = sign( payload , process.env.SECRETE_TOKEN)
+
+
+        res.cookie("jwt", token, {
+            httpOnly: true,
+            maxAge: 24 * 26 * 60 * 1000 // 1 days
+        })
 
         res.json({ message: 'Login successful' });
     } catch (error) {
@@ -50,7 +63,7 @@ export const SignUp = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
 
         // Create a new user
-        const newUser = new User({ email, password: hashedPassword });
+        const newUser = new User({ email, password: hashedPassword, role: 'user' });
         await newUser.save();
 
         res.status(201).json({ message: 'User created successfully' });
@@ -60,6 +73,35 @@ export const SignUp = async (req, res) => {
     }
 }
 
-export const changePassword = (req, res) => {
-    return res.send("Changing Password")
+export const changePassword = async (req, res) => {
+        // Check for validation errors
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+
+        const { currentPassword, newPassword } = req.body;
+        const userId = req.user.id;
+
+        try {
+            // Fetch the user from the database
+            const user = await User.findById(userId);
+
+            // Check if the current password matches the one in the database
+            const isMatch = await bcrypt.compare(currentPassword, user.password);
+            if (!isMatch) {
+                return res.status(401).json({ msg: 'Invalid current password' });
+            }
+
+            // Generate a new salt and hash the new password
+            const salt = await bcrypt.genSalt(10);
+            // Update the user's password in the database
+            user.password = await bcrypt.hash(newPassword, salt);
+            await user.save();
+
+            res.json({ msg: 'Password changed successfully' });
+        } catch (err) {
+            console.error(err.message);
+            res.status(500).send('Server Error');
+        }
 }
