@@ -1,15 +1,14 @@
 const request = require('supertest');
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 const app = require('../index');
-const Currency = require('../models/Currency');
+// const Currency = require('../models/Currency');
+const config = require("../../config");
+import { Currency } from "../models/currency";
 
 describe('Currency API', () => {
     beforeAll(async () => {
         // Connect to a test database
-        await mongoose.connect('mongodb://localhost:27017/currencies-test', {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        });
+        await mongoose.connect(config.connexionString);
     });
 
     afterAll(async () => {

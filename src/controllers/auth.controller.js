@@ -1,5 +1,8 @@
 import {validationResult} from "express-validator";
 import bcrypt from "bcrypt";
+
+const User = require("../models/user").User;
+
 export  const Loging = async  (req, res) =>  {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -53,7 +56,7 @@ export const SignUp = async (req, res) => {
         res.status(201).json({ message: 'User created successfully' });
     } catch (error) {
         console.error('Error during signup:', error);
-        res.status(500).json({ error: 'An error occurred during signup' });
+        res.status(500).json({ error: error });
     }
 }
 

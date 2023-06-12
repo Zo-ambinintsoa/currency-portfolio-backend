@@ -1,5 +1,4 @@
-import mongoose from "mongoose";
-const Schema = mongoose.Schema;
+import { Schema, model } from "mongoose";
 
 const CurrencySchema = new Schema({
     ticker: {
@@ -9,11 +8,8 @@ const CurrencySchema = new Schema({
     },
     name: String,
     APIUrl: String,
-})
+});
 
-const Currency = mongoose.model("currencies", CurrencySchema);
+const Currency = model("Currency", CurrencySchema);
 
-module.exports = {
-    Schema: CurrencySchema,
-    Currency
-}
+export { Currency, CurrencySchema };

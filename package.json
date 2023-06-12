@@ -22,7 +22,6 @@
     "jsonwebtoken": "^9.0.0",
     "mongodb-memory-server": "^8.12.2",
     "mongoose": "^7.1.1",
-    "supertest": "^6.3.3",
     "validator": "^13.9.0"
   },
   "devDependencies": {
@@ -31,6 +30,8 @@
     "@babel/node": "^7.20.7",
     "@babel/preset-env": "^7.21.5",
     "babel-watch": "^7.7.2",
-    "nodemon": "^2.0.22"
+    "jest": "^29.5.0",
+    "nodemon": "^2.0.22",
+    "supertest": "^6.3.3"
   }
 }

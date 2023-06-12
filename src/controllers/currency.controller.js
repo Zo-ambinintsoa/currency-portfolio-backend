@@ -1,4 +1,4 @@
-const Currency = require('../models/Currency');
+const Currency = require('../models/Currency').Currency;
 
 // Create a new currency
 exports.createCurrency = async (req, res, next) => {

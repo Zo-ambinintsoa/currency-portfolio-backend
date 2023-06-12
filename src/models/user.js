@@ -1,7 +1,4 @@
-import mongoose from "mongoose";
-const Schema = mongoose.Schema;
-import Currency from "./currency"
-const CurrencySchema = Currency.Schema;
+import { Schema, model } from "mongoose";
 
 const UserSchema = new Schema({
     email: {
@@ -10,16 +7,16 @@ const UserSchema = new Schema({
         index: true
     },
     password: String,
-    isAdmin: Boolean,
+    role: Boolean,
     portfolio: [{
         address: String,
-        currency: CurrencySchema
+        currency : [{
+            type: Schema.Types.ObjectId,
+            ref: 'Currency'
+        }]
     }]
-})
+});
 
-const User = mongoose.model("users", UserSchema);
+const User = model("User", UserSchema);
 
-module.exports = {
-    Schema: UserSchema,
-    User
-}
+export { User, UserSchema };
