@@ -221,9 +221,6 @@ This API documentation provides details about the available routes and their fun
     <tr>
       <td>Ambinintsoa Mananjara Herizo</td>
       <td>Full Stack Developer</td>
-      <td>
-        <a href="https://www.linkedin.com/in/zo-ambinintsoa/" target="_blank">LinkedIn Profile</a>
-      </td>
     </tr>
   </tbody>
 </table>
