@@ -214,8 +214,16 @@ This API documentation provides details about the available routes and their fun
 
 
 ## Author
+<p align="center">
+    <a href="https://www.linkedin.com/in/zo-ambinintsoa">
+        <img src="https://img.shields.io/badge/LinkedIn-blue?style=flat-square&logo=linkedin" alt="LinkedIn">
+    </a>
+    <a href="mailto:ambinintsoa.business@gmail.com">
+        <img src="https://img.shields.io/badge/Email-blue?style=flat-square&logo=gmail&logoColor=white" alt="e-mail">
+    </a>
+</p>
 
-<table class="table table-bordered table-striped">
+<table class="table table-bordered table-striped" align="center">
   </thead>
   <tbody>
     <tr>
@@ -225,11 +233,4 @@ This API documentation provides details about the available routes and their fun
   </tbody>
 </table>
 
-<p align="center">
-    <a href="https://www.linkedin.com/in/zo-ambinintsoa">
-        <img src="https://img.shields.io/badge/LinkedIn-blue?style=flat-square&logo=linkedin" alt="LinkedIn">
-    </a>
-    <a href="mailto:ambinintsoa.business@gmail.com">
-        <img src="https://img.shields.io/badge/Email-blue?style=flat-square&logo=gmail&logoColor=white" alt="e-mail">
-    </a>
-</p>
+
