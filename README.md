@@ -82,14 +82,16 @@ Feel free to customize the app by modifying the code in the src directory.
 
 This API documentation provides details about the available routes and their functionalities in the Currency Portfolio application.
 
-<h3> Base URL <h3/>
+<h3> Base URL </h3>
 
-The base URL for all the routes is: **http://localhost:4000**
+<p> The base URL for all the routes is: </p> 
+
+**http://localhost:4000**
 
 
-<h3> Authentication Routes <h3/>
+<h3> Authentication Routes </h3>
 
-<h4> Login <h4/>
+<h4> Login </h4>
 
 - URL: `/api/login`
 - Method: `POST`
@@ -98,7 +100,7 @@ The base URL for all the routes is: **http://localhost:4000**
   - `email`: User's email (string)
   - `password`: User's password (string)
 
-# Register
+<h4> Register </h4>
 
 - URL: `/api/signup`
 - Method: `POST`
@@ -107,7 +109,7 @@ The base URL for all the routes is: **http://localhost:4000**
   - `email`: User's email (string)
   - `password`: User's password (string)
 
-# Change Password
+<h4> Change Password </h4>
 
 - URL: `/api/changePassword`
 - Method: `POST`
@@ -117,30 +119,30 @@ The base URL for all the routes is: **http://localhost:4000**
   - `oldPassword`: User's current password (string)
   - `newPassword`: User's new password (string)
 
-# Get User Profile
+<h4> Get User Profile </h4>
 
 - URL: `/api/logout`
 - Method: `GET`
 - Description: Retrieves the user profile.
 - Authentication Required: Yes
 
-# Update User Profile
+<h4> Update User Profile </h4>
 
 - URL: `/api/logout`
 - Method: `GET`
 - Description: Updates the user profile.
 - Authentication Required: Yes
 
-# Logout
+<h4> Logout </h4>
 
 - URL: `/api/logout`
 - Method: `GET`
 - Description: Logs out the user.
 - Authentication Required: Yes
 
-# Currency Routes
+<h3> Currency Routes </h3>
 
-# Create a New Currency
+<h4> Create a New Currency </h4>
 
 - URL: `/currencies`
 - Method: `POST`
@@ -152,21 +154,21 @@ The base URL for all the routes is: **http://localhost:4000**
   - `name`: Currency's name (string)
   - `APIUrl`: Currency's API URL (string)
 
-# Get All Currencies
+<h4> Get All Currencies </h4>
 
 - URL: `/currencies`
 - Method: `GET`
 - Description: Retrieves all currencies.
 - Authentication Required: Yes
 
-# Get a Specific Currency
+<h4> Get a Specific Currency </h4>
 
 - URL: `/currencies/:id`
 - Method: `GET`
 - Description: Retrieves a specific currency by its ID.
 - Authentication Required: Yes
 
-# Update a Currency
+<h4> Update a Currency </h4>
 
 - URL: `/currencies/:id`
 - Method: `PUT`
@@ -178,7 +180,7 @@ The base URL for all the routes is: **http://localhost:4000**
   - `name`: Currency's name (string)
   - `APIUrl`: Currency's API URL (string)
 
-# Delete a Currency
+<h4> Delete a Currency </h4>
 
 - URL: `/currencies/:id`
 - Method: `DELETE`
@@ -186,13 +188,13 @@ The base URL for all the routes is: **http://localhost:4000**
 - Authentication Required: Yes
 - Admin Access Required: Yes
 
-# Authentication and Authorization
+<h4> Authentication and Authorization </h4>
 
 - The authentication routes (`/api/login`, `/api/signup`, `/api/changePassword`, `/api/logout`) require a valid user account and generate an authentication token.
 - The routes that require authentication (`/api/logout`, `/api/changePassword`, `/api/logout`, `/currencies`, `/currencies/:id`) require the authentication token to be included in the request headers.
 - The routes that require admin access (`/currencies`, `/currencies/:id`) also require the user to have the `isAdmin` flag set to `true` in their profile.
 
-## Error Responses
+<h4> Error Responses </h4>
 
 - Error responses will follow the standard HTTP error status codes and will include a JSON response body with an `error` property indicating the specific error message.
 
@@ -214,12 +216,6 @@ The base URL for all the routes is: **http://localhost:4000**
 ## Author
 
 <table class="table table-bordered table-striped">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Profession</th>
-      <th>LinkedIn Profile</th>
-    </tr>
   </thead>
   <tbody>
     <tr>
@@ -231,3 +227,12 @@ The base URL for all the routes is: **http://localhost:4000**
     </tr>
   </tbody>
 </table>
+
+<p align="center">
+    <a href="https://www.linkedin.com/in/zo-ambinintsoa">
+        <img src="https://img.shields.io/badge/LinkedIn-blue?style=flat-square&logo=linkedin" alt="LinkedIn">
+    </a>
+    <a href="mailto:ambinintsoa.business@gmail.com">
+        <img src="https://img.shields.io/badge/Email-blue?style=flat-square&logo=gmail&logoColor=white" alt="e-mail">
+    </a>
+</p>
