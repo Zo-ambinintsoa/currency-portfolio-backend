@@ -4,6 +4,7 @@ import {sign} from "jsonwebtoken";
 
 import {User} from "../models/user";
 
+// Authenticate user and generate a token
 export  const Login = async  (req, res) =>  {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -45,6 +46,53 @@ export  const Login = async  (req, res) =>  {
     }
 }
 
+
+// Get user profile
+export const getUserProfile = async (req, res) => {
+    try {
+        // Fetch the user from the database based on the authenticated user ID (req.userId)
+        const user = await User.findById(req.userId);
+
+        // If user not found, return 404 not found
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Return the user profile data
+        res.status(200).json({ user });
+    } catch (error) {
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
+// Update user profile
+export const updateUserProfile = async (req, res) => {
+    try {
+        // Fetch the user from the database based on the authenticated user ID (req.userId)
+        const user = await User.findById(req.userId);
+
+        // If user not found, return 404 not found
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Update the user profile data
+        user.name = req.body.name;
+        user.email = req.body.email;
+        // Add more fields as needed
+
+        // Save the updated user profile
+        await user.save();
+
+        // Return success message
+        res.status(200).json({ message: 'User profile updated successfully' });
+    } catch (error) {
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
+
+// create a new user
 export const SignUp = async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -74,6 +122,7 @@ export const SignUp = async (req, res) => {
     }
 }
 
+// Disconnect connected user and destroy the token
 export const Logout = async (req, res) => {
     res.clearCookie('authToken');
     res.status(200).send({
@@ -81,6 +130,7 @@ export const Logout = async (req, res) => {
     });
 }
 
+// Change Authenticated user Password
 export const changePassword = async (req, res) => {
         // Check for validation errors
         const errors = validationResult(req);
