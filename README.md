@@ -11,7 +11,7 @@
 
 # Currency Portfolio backEnd
 
-<img src="./screenshoot/screenshoot.png" alt="Alt Text" width="800" height="500" align="center" />
+<img src="./screenshoot/screenShoot.png" alt="Alt Text" width="800" height="500" align="center" />
 
 Currency Portfolio is a web application that allows users to manage their cryptocurrency portfolio. Users can track their holdings, view current market prices, and analyze their portfolio performance.
 
